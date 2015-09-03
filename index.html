@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>自造 Haskell Compiler 工作坊 活動介紹</title>
+        <meta http-equiv=content-type content=text/html;charset=UTF-8>
+        <style>
+            @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+            @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+            @font-face {
+              font-family: 'tea';
+              src: url(simplified-SentyTEA-Platinum.ttf);
+            };
+
+            body {
+              font-family: 'Droid Serif';
+            }
+
+            h1, h2 {
+              font-family: 'tea';
+            }
+
+            .remark-slide-content h1 {
+                font-size: 32px;
+            }
+
+            .remark-slide-content h2 {
+                font-size: 24px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <textarea id=source>
+class: center, middle
+
+# 自造 Haskell Compiler 工作坊 活動介紹
+
+# CindyLinz
+
+2015.9.3
+
+---
+class: center, middle
+
+# 預期目標
+
+---
+class: center, middle
+
+## 擁有一個自己生活圈裡的 Haskell
+
+--
+
+擁有 -- 可以隨意修改
+
+--
+
+生活圈 -- 隨時可以實用<br>(browser, 手機app, jvm..)
+
+---
+class: center, middle
+
+## 體驗 Haskell Compiler 很好寫
+
+--
+
+希望啦 ♥
+
+--
+
+反正我一定會想辦法弄出來 (怒)
+
+---
+class: center, middle
+
+## 見證 Lambda Calculus 是計算的源頭
+
+--
+
+-- 計算的源頭 --<br>
+只有兩條規則 - 建立函數 應用函數<br>
+Turing complete
+
+--
+
+-- 見證 --<br>
+親手直接用 Lambda Calculus 寫演算法<br>
+從 Haskell 直接看出對應的 Lambda Calculus 程式
+
+<!--
+我們可能學過 Turing Machine 是計算的根本<br>
+但很可能從來沒有用 Turing Machine 寫過複雜度算得上是演算法的程式
+
+ --
+
+我們寫 C, 你寫 Java, 但應該看不出它如何能跟 Turing Machine 作對應<br>
+就連組合語言也需要很強大的想像力才能感受到一點 Turing Machine 的痕跡
+
+ --
+
+我們將從 Lambda Calculus 開始打造, 會寫一些 Lambda Calculus 程式<br>
+會親身感受到最遠始最古老的 Lambda Calculus (1936 年生)<br>
+規則比 Turing Machine 還要少, 卻與近代語言非常相像
+
+ --
+
+最後, 我們會看到 Haskell 根本只是有 compiler 會幫我們抓問題的 Lambda Calculus
+
+ --
+
+每看一段 Haskell 程式碼, 心中就會浮出它在 Lambda Calculus 程式對應的長相
+
+-->
+
+---
+class: center, middle
+
+# 時間 / 地點
+
+---
+class: center, middle
+
+## 每月 第二個週四 與 最後一個週四
+
+## 19:30 ~ 21:30
+
+## 2015.9.24 (四) 起
+
+(Functional Thursday 的前後週四)
+
+---
+class: center, middle
+
+## 福州街 11 號
+## 滴咖啡
+## 二樓房間 (要脫鞋)
+
+<img src=drop_coffee.jpg style=width:70%>
+
+---
+class: center, middle
+
+# 進行方式
+
+---
+
+# 進行方式
+
+  + 每次聚會後半
+
+    決定下一次的閱讀進度, 或是開發進度
+
+    決定哪些要做哪些選做, 預告自己想採用什麼作法
+
+  + 兩次聚會之間
+
+    讀書, 實作, 線上討論 (包含改目標 XD)..
+
+    發文用 [FB Functional Thursday 社團](https://www.facebook.com/groups/functioanl.thursday/)
+
+    閒聊用 [gitter.im #CindyLinz/BuildYourOwnHaskellCompiler](https://gitter.im/CindyLinz/BuildYourOwnHaskellCompiler)
+
+  + 每次聚會前半
+
+    demo 這一次的作品
+
+    閱讀進度如果是分讀型式的則介紹內容
+
+    討論決定自己想採用的設計
+
+---
+class: center, middle
+
+# 預期路線圖
+
+---
+class: center, middle
+
+## Lambda Calculus interpreter
+
+## Haskell to Lambda Calculus <span style=color:red>trans</span>piler
+
+## Lambda Calculus compiler &amp; runtime
+
+<hr>
+
+## Libraries (porting / developing)
+
+## Optimizations
+
+---
+## Lambda Calculus interpreter
+
+  + pure Lambda Calculus interpreter
+
+  + 加上 primitive function
+
+  + 加上 IO 與 FFI
+
+---
+## Haskell to Lambda Calculus transpiler
+
+  + parse 使用 haskell-src-ext package (除非個人興趣想自己做)
+
+  + 選一組 baseline Haskell 語法 (手動標滿 type),<br>
+    transpile to Lambda Calculus
+
+  + baseline Haskell 的 type inference / check
+
+  + typeclass 的 syntax desugar (對, desugar 就可以作到了)
+
+  + typeclass 的 type inferenece / check
+
+  + 其他重要語法的 syntax desugar<br>(會排出各語法重要性的優先順序, 排在後面的有興趣的人才做)
+
+  + import 功能 (私心希望有完整的 mutually recursive import)
+
+  + preprocess macro<br>(沒有的話, 許多現有的 Haskell library 需要手動改一改才能用)
+
+  + (選作 template haskell)
+
+  + **把這一頁所有的程式 (都是 pure haskell 寫的) 轉成 Lambda Calculus**
+
+---
+## Lambda Calculus compiler &amp; runtime
+
+  + 選讀分讀現有的 functional language vm 實作方式
+
+  + 選讀分讀現有的記憶體管理機制 (含 garbage collection)<br>
+    如果實作的環境有完整的底層可用, 就不一定需要自己做
+
+  + 設計自己的 vm 構造 (data struct 寫成簡易 spec) 互相討論可能的優缺點
+
+  + 選擇 / 或設計自己的記憶體管理機制, 想一下選擇的理由, 互相討論
+
+  + 實作記憶體管理 (如果有的話)
+
+  + 實作 pure runtime
+
+  + 實作 primitive function
+
+  + 實作 IO 與 FFI
+
+---
+class: center, middle
+
+# 祝大家都有一個愉快的 Haskell Compiler<br><span style=color:red>♥</span>
+
+[meetup 報名處](http://www.meetup.com/Functional-Thursday/events/225099044/)
+
+為了人數掌握精準一點
+
+要來的人麻煩請一定要報名
+
+報名後如果不來請一定要取消歐
+
+        </textarea>
+        <script src=https://gnab.github.io/remark/downloads/remark-0.11.0.min.js></script>
+        <script>
+            var slideshow = remark.create({
+              highlightStyle: 'monokai',
+              highlightLanguage: 'remark'
+            });
+        </script>
+    </body>
+</html>
